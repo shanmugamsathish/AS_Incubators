@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>User Page</title>
+</head>
+<body>
+<table border="1">
+<tr>
+<th>Username</th>
+<th>Email</th>
+<th>Mobile</th>
+<th>password</th>
+
+</tr>
+{% for s in teachers_list %}
+<tr>
+<td>{{s.id}}</td>
+<td>{{s.name}}</td>
+<td>{{s.mail}}</td>
+<td>{{s.mobile}}</td>
+<td>{{s.password}}</td>
+</tr>
+{% endfor %}
+</body>
+</html>

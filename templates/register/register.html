@@ -1,0 +1,239 @@
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Incubators Sign in</title>
+    <link rel="icon" href="35-357668_innovation-incubator-innovation.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="sign.css">
+    <script defer src="sign.js"></script>
+</head>
+<body>
+    <div class="container">
+        <form id="form" action="register" method="post">
+            {% csrf_token %}
+            <h1>Registration</h1>
+            <div class="input-control">
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text" required>
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="text" required>
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <label for="mobile">Mobile</label>
+                <input id="mobile" name="mobile" type="text" required>
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <label for="password">Password</label>
+                <input id="password"name="password" type="password" required>
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <label for="password2">Password again</label>
+                <input id="password2"name="password2" type="password" required>
+                <div class="error"></div>
+            </div>
+            
+            <input type="submit" value="signup">
+         
+        </form>
+    </div>
+    <style>
+        body {
+            background: linear-gradient(rgba(0,0,0,0.5),#009688), url({% static 'images/banner.jpg' %});
+            background-size: cover;
+    background-position: center;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+        
+}
+
+#form {
+    width: 300px;
+    margin: 20vh auto 0 auto;
+    padding: 20px;
+    background-color: rgba(100, 100, 100, 0.5);
+    box-shadow: inset -5px -5px rgba(0, 0, 0, 0.5);
+    border-radius: 25px;
+    font-size: 12px;
+}
+
+#form h1 {
+    color: #00b3ff;
+    text-align: center;
+}
+
+#form button {
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    color: white;
+    background-color: rgb(41, 194, 46);
+    border: none;
+    border-radius: 4px;
+}
+
+.input-control {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-control input {
+    border: 2px solid #f0f0f0;
+	border-radius: 4px;
+	display: block;
+	font-size: 12px;
+	padding: 10px;
+	width: 100%;
+}
+.input-control label{
+    color: #00b3ff;
+}
+
+.input-control input:focus {
+    outline: 0;
+}
+
+.input-control.success input {
+    border-color: #09c372;
+}
+
+.input-control.error input {
+    border-color: #ff3860;
+}
+
+.input-control .error {
+    color: #ff3860;
+    font-size: 9px;
+    height: 13px;
+}
+#form button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+input[type=submit]{
+    background-color: #0f2027;
+    color: #f0f0f0; 
+    margin-left: 6px;  
+    padding: 10px 125px;
+    border: solid rgb(0, 213, 255);
+    cursor: pointer;
+}
+input[type=submit]:hover{
+    color: rgb(0, 213, 255);
+}
+input[type=text],input[type=password]{
+    background-color: rgba(100, 100, 100, 0.5);
+    color: aliceblue;
+}
+        
+    </style>
+
+  <!--  <script>
+        const form = document.getElementById('form');
+const username = document.getElementById('username');
+const email = document.getElementById('email');
+const mobile = document.getElementById('mobile');
+const password = document.getElementById('password');
+const password2 = document.getElementById('password2');
+
+form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    validateInputs();
+});
+
+const setError = (element, message) => {
+    const inputControl = element.parentElement;
+    const errorDisplay = inputControl.querySelector('.error');
+
+    errorDisplay.innerText = message;
+    inputControl.classList.add('error');
+    inputControl.classList.remove('success')
+}
+
+const setSuccess = element => {
+    const inputControl = element.parentElement;
+    const errorDisplay = inputControl.querySelector('.error');
+
+    errorDisplay.innerText = '';
+    inputControl.classList.add('success');
+    inputControl.classList.remove('error');
+};
+
+const isValidEmail = email => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+
+const validateInputs = () => {
+    const usernameValue = username.value.trim();
+    const emailValue = email.value.trim();
+    const mobileValue=mobile.value.trim();
+    const passwordValue = password.value.trim();
+    const password2Value = password2.value.trim();
+
+    if(usernameValue === '') {
+        setError(username, 'Username is required');
+    } else {
+        setSuccess(username);
+    }
+
+    if(emailValue === '') {
+        setError(email, 'Email is required');
+    } else if (!isValidEmail(emailValue)) {
+        setError(email, 'Provide a valid email address');
+    } else {
+        setSuccess(email);
+    }
+
+    if(mobileValue === '' && mobileValue !== Number){
+        setError(mobile, 'Mobile number is required');
+    } else if (mobileValue.length < 10) {
+        setError(mobile, 'Enter a valid mobile number');
+    } else {
+        setSuccess(mobile);
+    }
+
+    if(passwordValue === '') {
+        setError(password, 'Password is required');
+    } else if (passwordValue.length < 8 ) {
+        setError(password, 'Password must be at least 8 character.')
+    } else {
+        setSuccess(password);
+    }
+
+    if(password2Value === '') {
+        setError(password2, 'Please confirm your password');
+    } else if (password2Value !== passwordValue) {
+        setError(password2, "Passwords doesn't match");
+    } else {
+        setSuccess(password2);
+    }
+
+    if(validateInputs === ''){
+        setError('Please Enter All Valid inputs')
+    }
+    else{
+        
+    }
+
+};
+    </script>-->
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registeration</title>
+</head>
+<body>
+    <form action="register" method="post">
+        {% csrf_token %}
+
+        <h1>Registration form</h1>
+
+        <input type="text" name="first_name" placeholder="First Name" required><br>
+        <input type="text" name="last_name" placeholder="Last Name" required><br>
+        <input type="text" name="username" placeholder="User Name" required><br>
+        <input type="email" name="email" placeholder="email" required><br>
+        <input type="password" name="password1" placeholder="password" required><br>
+        <input type="password" name="password2" placeholder="Confirm password" required><br>
+        <input class="submit" type="submit">
+
+    </form>
+
+    <div class="msg">
+        {% for message in messages %}
+        <h3>{{message}}</h3>
+        {% endfor %}
+    </div>
+
+    <style>
+        
+        body {
+            background: linear-gradient(rgba(0,0,0,0.5),#009688), url({% static 'images/banner.jpg' %});
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        
+        }
+        form{
+            width: 300px;
+            margin: 20vh auto 0 auto;
+            padding: 20px;
+            background-color: rgba(100, 100, 100, 0.5);
+            box-shadow: inset -5px -5px rgba(0, 0, 0, 0.5);
+            border-radius: 25px;
+            font-size: 12px;
+        }
+        h1{
+            color: whitesmoke;
+            text-align: center;
+            margin-top: 8%;
+            margin-bottom: 25px;
+        }
+        input{
+            
+            margin-bottom: 25px;
+            padding: 10px 60px;
+            text-align: center;
+            
+            
+        }
+        .submit{
+            text-align: center;
+            margin-left: 20%;
+            background-color: rgb(21, 21, 21);
+            color: rgb(95, 249, 0);
+            border: solid rgb(0, 213, 255);
+            cursor: pointer;
+        
+        }
+        .msg{
+            text-align: center;
+        }
+        
+
+    </style>
+    
+</body>
+</html>
